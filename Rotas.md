@@ -15,13 +15,13 @@ const PORT = process.env.PORT || 3000;
 
 /* Rota principal usando um index.ejs. */
 app.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  return res.render('index', { title: 'Express' });
 }); // A mensagem será renderizada no arquivo .ejs
 
 /* Rota “sobre” sem usar uma view. */
 app.get('/sobre', function(req, res) {
   let msg = '<h2>Sobre Rotas...</h2>';
-  res.send(msg);
+  return res.send(msg);
 });
 
 app.listen(PORT, () => {
@@ -48,13 +48,13 @@ const PORT = process.env.PORT || 3000;
 /* Rota usando 1 parâmetro enviado na URL. */
 app.get('/ola/:nome', function(req, res) {
   let msg = '<h2>Olá, ' + req.params.nome + '!</h2>';
-  res.send(msg);
+  return res.send(msg);
 });
 
 /*Podemos adicionar mais de um parâmetro na rota, mas é necessario separar os parâmetros por barras.*/
 app.get('/ola/:nome/:sobrenome', function(req, res) {
   let msg = '<h2>Olá, ' + req.params.nome + " " + req.params.sobrenome + '!</h2>';
-  res.send(msg);
+  return res.send(msg);
 });
 
 app.listen(PORT, () => {
@@ -74,7 +74,7 @@ const PORT = process.env.PORT || 3000;
 app.get('/busca', (req, res) => {
     const termo = req.query.q; // "node"
     const pagina = req.query.pag; // "1"
-    res.send(`Resultados para: ${termo} na página ${pagina}`);
+    return res.send(`Resultados para: ${termo} na página ${pagina}`);
 });
 
 app.listen(PORT, () => {
@@ -106,36 +106,36 @@ const PORT = process.env.PORT || 3000;
 
 app.get('/api/user', (req, res) => {
   // Define status 200 e envia JSON
-  res.status(200).json({ id: 1, name: 'João' });
+  return res.status(200).json({ id: 1, name: 'João' });
 });
 
 app.get('/error', (req, res) => {
   // Define status 404 e envia mensagem
-  res.status(404).send('Página não encontrada');
+  return res.status(404).send('Página não encontrada');
 });
 
 app.get('/error', (req, res) => {
   // Define status 500 e envia "Internal Server Error"
-  res.sendStatus(500);
+  return res.sendStatus(500);
 });
 
 app.get('/perfil', (req, res) => {
   // Renderiza template engine (EJS, Pug, etc)
-  res.render('perfil', { usuario: 'Maria' });
+  return res.render('perfil', { usuario: 'Maria' });
 });
 
 app.get('/imagem', (req, res) => {
   // Envia arquivo
-  res.sendFile(__dirname + '/foto.png');
+  return res.sendFile(__dirname + '/foto.png');
 });
 
 app.get('/antiga-rota', (req, res) => {
   // Redireciona para uma noba rota
-  res.redirect('/nova-rota');
+  return res.redirect('/nova-rota');
 });
 
 app.listen(PORT, () => {
-    console.log(`Rodando na porta ${PORT}.`);
+  console.log(`Rodando na porta ${PORT}.`);
 });
 ```
 

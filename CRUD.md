@@ -16,10 +16,10 @@ router.post('/add', async function(req, res) {
     await db.query(cmd, [nome, nacionalidade], async function(erro){
         if (erro){
             //Envia erro
-            res.send(erro);
+            return res.send(erro);
         }
         //Redireciona para outra rota.
-        res.redirect('/autores/listar');    
+        return res.redirect('/autores/listar');    
     });
 });
 ```
@@ -36,7 +36,7 @@ router.post('/add', async function(req, res) {
 ### Listar dados (Read)
 ```javascript
 router.get('/add', async function(req, res) {
-    res.render('autores-add', {resultado: {}})
+    return res.render('autores-add', {resultado: {}})
 });
 
 /* Rota para obter os dados atuais do autor*/
@@ -48,7 +48,7 @@ router.get('/edit/:id', async function(req, res) {
         if (erro){
             res.send(erro);
         }
-    res.render('autores-add', {resultado: listagem[0]});
+    return res.render('autores-add', {resultado: listagem[0]});
     });
 });
 ```
@@ -70,11 +70,11 @@ router.put('/edit/:id', async function(req, res) {
     let cmd = "UPDATE TbAutor SET NoAutor = ?, IdNacionalidade = ? WHERE IdAutor = ?;";
     await db.query(cmd, [nome, nacionalidade, id], async function(erro, listagem){
         if (erro){
-            res.send(erro);
+            return res.send(erro);
         }
         //Code 303 permite o redirecionamento entre rotas com métodos diferentes:
         //PUT → GET
-        res.redirect(303, '/autores/listar');
+        return res.redirect(303, '/autores/listar');
     });
 });
 ```
@@ -93,9 +93,9 @@ router.delete('/delete/:id', async function(req, res) {
     let cmd = "DELETE FROM TbAutor WHERE IdAutor = ?;";
     await db.query(cmd, [id], async function(erro, listagem){
         if (erro){
-            res.send(erro);
+            return res.send(erro);
         }
-        res.redirect(303, '/autores/listar');
+        return res.redirect(303, '/autores/listar');
     });
 });
 ```

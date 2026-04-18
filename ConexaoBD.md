@@ -63,9 +63,9 @@ import db from '../utils/db.js';
 app.get('/autores/listar', async function(req, res) {
    await db.query('SELECT * FROM TbAutor', [], async function(erro, listagem){
       if (erro){
-         res.send(erro);
+         return res.send(erro);
       }
-      res.send(listagem);
+      return res.send(listagem);
    });
 });
 ```
@@ -89,11 +89,11 @@ app.get('/autores/listar', async function(req, res) {
    cmd += ' ORDER BY NoAutor';
    await db.query(cmd, [], function(erro, listagem){
       if (erro){
-         res.send(erro);
+         return res.send(erro);
       }
 
       /* Renderiza os dados de listagem no ejs*/
-      res.render('autores-lista', {resultado: listagem});
+      return res.render('autores-lista', {resultado: listagem});
    });
 });
 ```

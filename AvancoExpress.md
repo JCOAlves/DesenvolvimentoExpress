@@ -59,7 +59,7 @@ os navegadores utilizam o **CORS** (Cross-Origin Resource Sharing), que é um me
 4. **CORS** em uma única rota:
     ```js
     app.get('/api/data', cors(corsOptions), (req, res) => {
-        res.json({ msg: 'Esta rota tem CORS específico' });
+        return res.json({ msg: 'Esta rota tem CORS específico' });
     });
     ```
 ## 3. Utilizando a sessão (`session`).
@@ -90,7 +90,7 @@ compras e preferências personalizadas, usando o middleware `express-session` pa
     app.get('/', (req, res) => {
         // Se a sessão 'views' não existir, inicia com 0, senão, incrementa
         req.session.views = (req.session.views || 0) + 1;
-        res.send(`Você visitou esta página ${req.session.views} vezes.`);
+        return res.send(`Você visitou esta página ${req.session.views} vezes.`);
     });
 
     // 2. Rota de Login
@@ -99,18 +99,18 @@ compras e preferências personalizadas, usando o middleware `express-session` pa
       // Valide usuário/senha aqui
       if (username === 'usuario' && password === '123') {
         req.session.user = username; // Cria a sessão [2]
-        res.send('Login bem-sucedido');
+        return res.send('Login bem-sucedido');
       } else {
-        res.status(401).send('Credenciais inválidas');
+        return res.status(401).send('Credenciais inválidas');
       }
     });
 
     // 3. Rota Protegida (Exemplo)
     app.get('/dashboard', (req, res) => {
       if (req.session.user) {
-        res.send(`Olá ${req.session.user}, bem-vindo!`);
+        return res.send(`Olá ${req.session.user}, bem-vindo!`);
       } else {
-        res.status(401).send('Não autorizado');
+        return res.status(401).send('Não autorizado');
       }
     });
 
@@ -121,7 +121,7 @@ compras e preferências personalizadas, usando o middleware `express-session` pa
           return res.send('Erro ao sair');
         }
         res.clearCookie('connect.sid'); // Limpa o cookie da sessão
-        res.send('Logout realizado com sucesso');
+        return res.send('Logout realizado com sucesso');
       });
     });
 

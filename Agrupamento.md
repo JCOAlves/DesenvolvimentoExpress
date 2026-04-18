@@ -24,15 +24,15 @@ router.get('/listar', async function(req, res) {
   cmd += ' ON a.IdNacionalidade = n.IdNacionalidade ORDER BY NoAutor';
   await db.query(cmd, [], async function(erro, listagem){
     if (erro){
-      res.send(erro);
+      return res.send(erro);
     }
-    res.render('autores-lista', {resultado: listagem});
+    return res.render('autores-lista', {resultado: listagem});
   });
 });
 
 //Adicionar autores
 router.get('/add', function(req, res) {
-  res.render('autores-add');
+  return res.render('autores-add');
 });
 
 export default router;
@@ -65,13 +65,13 @@ a sintaxe de módulos ES (`import` e `export`).
 
    // Exemplo de função de controle para listar usuários
    export const listarUsuarios = (req, res) => {
-     res.status(200).send('Lista de usuários');
+     return res.status(200).send('Lista de usuários');
    };
 
    // Exemplo de função de controle para obter um único usuário
    export const obterUsuario = (req, res) => {
      const userId = req.params.id;
-     res.status(200).send(`Detalhes do usuário ${userId}`);
+     return res.status(200).send(`Detalhes do usuário ${userId}`);
    };
    ```
 
