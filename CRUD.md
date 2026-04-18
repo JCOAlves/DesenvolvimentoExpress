@@ -46,7 +46,7 @@ router.get('/edit/:id', async function(req, res) {
 
     await db.query(cmd, [id], async function(erro, listagem){
         if (erro){
-            res.send(erro);
+            return res.send(erro);
         }
     return res.render('autores-add', {resultado: listagem[0]});
     });
