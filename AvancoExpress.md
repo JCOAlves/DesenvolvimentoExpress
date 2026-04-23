@@ -86,7 +86,7 @@ compras e preferências personalizadas, usando o middleware `express-session` pa
         cookie: {
             httpOnly: true, // Bloqueia o acesso ao cookie via JavaScript do navegador
             secure: true, // Em produção, use secure: true e HTTPOnly. Defina como true se usar HTTPS
-            maxAge: 3600000  // Tempo de vida do cookie em milissegundos (ex: 1 hora)
+            maxAge: 60 * 60 * 1000  // Tempo de vida do cookie em milissegundos (ex: 1 hora)
         } 
     }));
 
