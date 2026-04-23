@@ -82,8 +82,12 @@ compras e preferências personalizadas, usando o middleware `express-session` pa
         name: 'connect.sid', // Nome do cookie
         secret: 'uma-chave-secreta-muito-segura', // Essencial para assinar o cookie. Substitua por uma string segura
         resave: true, // Salva a sessão mesmo se não modificada
-        saveUninitialized: true, // Salva sessão para usuários não logados
-        cookie: { secure: true } // Em produção, use secure: true e HTTPOnly. Defina como true se usar HTTPS
+        saveUninitialized: true, // Salva sessão para usuários não logados, mas o ideal é deixar em false para cumprir leis de privacidade, pois evita a criação de cookies antes que o usuário faça login.
+        cookie: {
+            httpOnly: true, // Bloqueia o acesso ao cookie via JavaScript do navegador
+            secure: true, // Em produção, use secure: true e HTTPOnly. Defina como true se usar HTTPS
+            maxAge: 3600000  // Tempo de vida do cookie em milissegundos (ex: 1 hora)
+        } 
     }));
 
     // 1. Exemplo de rota para usar a sessão
