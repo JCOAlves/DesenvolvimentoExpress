@@ -51,7 +51,9 @@ os navegadores utilizam o **CORS** (Cross-Origin Resource Sharing), que é um me
 3. Uso configurado (Permitir origens específicas - Produção):
     ```js
     const corsOptions = {
-        origin: 'http://meuapp.com', // Apenas esta origem pode acessar
+        origin: 'http://localhost:5173', // URL do seu frontend (Vite/React)
+        methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+        allowedHeaders: ['Content-Type', 'Authorization'], // Necessário para o JWT
         optionsSuccessStatus: 200
     };
     app.use(cors(corsOptions));
