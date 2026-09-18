@@ -24,6 +24,17 @@ app.get('/sobre', function(req, res) {
   return res.send(msg);
 });
 
+// Rotas para capturar TUDO no servidor (Para Páginas 404)
+
+app.get('/arquivos/(.*)', (req, res) => {
+  const subCaminho = req.params[0]; // O que foi capturado pelo coringa fica disponível no req.params
+  res.send(`Você tentou acessar a pasta: ${subCaminho}`);
+});
+
+app.get(/.*/, (req, res) => {
+  res.status(404).send('Página não encontrada!');
+});
+
 app.listen(PORT, () => {
     console.log(`Rodando na porta ${PORT}.`);
 });
