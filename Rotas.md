@@ -26,12 +26,12 @@ app.get('/sobre', function(req, res) {
 
 // Rotas para capturar TUDO no servidor (Para Páginas 404)
 
-app.get('/arquivos/(.*)', (req, res) => {
-  const subCaminho = req.params[0]; // O que foi capturado pelo coringa fica disponível no req.params
-  res.send(`Você tentou acessar a pasta: ${subCaminho}`);
+app.get('/arquivos/*subCaminho', (req, res) => {
+  const { subCaminho } = req.params; // O que foi capturado pelo coringa fica disponível no req.params
+  res.send(`Você tentou acessar a pasta: ${subCaminho[0]}`);
 });
 
-app.get(/.*/, (req, res) => {
+app.get(/*notfound, (req, res) => {
   res.status(404).send('Página não encontrada!');
 });
 
